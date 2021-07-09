@@ -8,13 +8,13 @@ parseMessageWords :: [String] -> LogMessage
 parseMessageWords ("I":timestamp:rest) = LogMessage Info (read timestamp) (unwords rest)
 parseMessageWords ("W":timestamp:rest) = LogMessage Warning (read timestamp) (unwords rest)
 parseMessageWords ("E":errorCode:timestamp:rest) = LogMessage (Error (read errorCode)) (read timestamp) (unwords rest)
-parseMessageWords rest = Unknown (unwords rest)
+parseMessageWords = Unknown . unwords
 
 parseMessage :: String -> LogMessage
 parseMessage = parseMessageWords . words
 
 parse :: String -> [LogMessage]
-parse x = map parseMessage (lines x)
+parse = map parseMessage . lines
 
 -- ex2
 insert :: LogMessage -> MessageTree -> MessageTree
