@@ -66,5 +66,6 @@ myFoldl f base = foldr (flip f) base . reverse
 
 -- ex4
 sieveSundaram :: Integer -> [Integer]
-sieveSundaram n = [3..(2*n+2)] \\ unprimes
-  where unprimes = filter (<=2*n+2) [i*j | i <- [2..n], j <- [2..n]]
+sieveSundaram n = [3..n'] \\ unprimes
+  where unprimes = filter (<=n') [i*j | i <- [2..n], j <- [2..n]]
+        n' = 2*n+2
